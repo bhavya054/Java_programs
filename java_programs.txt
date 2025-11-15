@@ -1,0 +1,191 @@
+Inheritance
+// Create a superclass.
+class A 
+{
+  int i, j;
+ void showij()
+ {
+  System.out.println("i and j: " + i + " " + j);
+ }
+}
+// Create a subclass by extending class A.
+class B extends A 
+{
+ int k;
+ void showk() 
+ {
+  System.out.println("k: " + k);
+ }
+ void sum()
+ {
+  System.out.println("i+j+k: " + (i+j+k));
+ }
+}
+
+class InheritanceDemo 
+{
+ public static void main(String args[]) 
+ {
+  A supob = new A();
+  B subob = new B();
+  // The superclass may be used by itself.
+  supob.i = 10;
+  supob.j = 20;
+  System.out.println("Contents of superOb: ");
+  supob.showij();
+  System.out.println();
+ /* The subclass has access to all public members of its superclass. */
+  subob.i = 7;
+  subob.j = 8;
+  subob.k = 9;
+  System.out.println("Contents of subOb: ");
+  subob.showij();
+  subob.showk();
+  System.out.println();
+  System.out.println("Sum of i, j and k in subOb:");
+  subob.sum();
+ }
+}
+
+Abstraction
+
+abstract class ParentClass
+{
+ abstract void method1();   //abstract method
+ void method2()	    //concrete method
+ {
+  System.out.println("Method of abstract class");
+ }
+}
+
+class ChildClass extends ParentClass
+{
+ void method1()
+ {
+  System.out.println("Method of child class");
+ }
+}
+
+class AbstractDemo1
+{
+ public static void main(String args[ ])
+ {
+  ChildClass c=new ChildClass();
+  c.method1();
+  c.method2();
+  /* Abstract method can't be istantiated but static method 
+     of abstract class can be called with class name */
+  //ParentClass.method2();
+ }
+}
+
+
+Encapsulation
+
+// Student.java - The encapsulated class
+class Student {
+    private String name;
+    private int age;
+    private String studentId;
+
+    // Getter for name
+    public String getName() {
+        return name;
+    }
+
+    // Setter for name
+    public void setName(String name) {
+        // You can add validation logic here if needed
+        this.name = name;
+    }
+
+    // Getter for age
+    public int getAge() {
+        return age;
+    }
+
+    // Setter for age
+    public void setAge(int age) {
+        // Example of validation: ensure age is positive
+        if (age > 0) {
+            this.age = age;
+        } else {
+            System.out.println("Age cannot be negative or zero.");
+        }
+    }
+
+    // Getter for studentId
+    public String getStudentId() {
+        return studentId;
+    }
+
+    // Setter for studentId
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+}
+
+// Main.java - Demonstrating the use of the encapsulated class
+public class Main {
+    public static void main(String[] args) {
+        // Create a Student object
+        Student student1 = new Student();
+
+        // Set values using public setter methods
+        student1.setName("Alice");
+        student1.setAge(20);
+        student1.setStudentId("S12345");
+
+        // Attempt to set an invalid age (demonstrates validation)
+        student1.setAge(-5); // This will print an error message
+
+        // Get values using public getter methods
+        System.out.println("Student Name: " + student1.getName());
+        System.out.println("Student Age: " + student1.getAge());
+        System.out.println("Student ID: " + student1.getStudentId());
+
+        // Direct access to private variables is not allowed (will cause a compile-time error)
+        // student1.name = "Bob"; // This line would cause an error
+    }
+}
+
+Polymorphism
+
+// Parent class (Superclass)
+class Animal {
+    public void makeSound() {
+        System.out.println("The animal makes a sound.");
+    }
+}
+
+// Child class (Subclass) - Dog
+class Dog extends Animal {
+    @Override // Annotation to indicate method overriding
+    public void makeSound() {
+        System.out.println("The dog barks: Woof Woof!");
+    }
+}
+
+// Child class (Subclass) - Cat
+class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("The cat meows: Meow Meow!");
+    }
+}
+
+// Main class to demonstrate polymorphism
+public class PolymorphismDemo {
+    public static void main(String[] args) {
+        // Create objects of different animal types
+        Animal myAnimal = new Animal(); // Animal object
+        Animal myDog = new Dog();       // Dog object referenced by Animal type
+        Animal myCat = new Cat();       // Cat object referenced by Animal type
+
+        // Call the makeSound() method on each object
+        // The specific implementation called depends on the actual object type at runtime
+        myAnimal.makeSound(); // Calls Animal's makeSound()
+        myDog.makeSound();    // Calls Dog's makeSound()
+        myCat.makeSound();    // Calls Cat's makeSound()
+    }
+}
